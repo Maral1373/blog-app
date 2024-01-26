@@ -7,22 +7,24 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import WritePost from "./pages/WritePost";
 import Home from "./pages/Home";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const App = () => {
-	return (
-		<ThemeProvider theme={theme}>
-			<Router>
-				<Routes>
-					<Route path="/" element={<Navbar />}>
-						<Route path="/" element={<Home />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/write" element={<WritePost />} />
-					</Route>
-				</Routes>
-			</Router>
-		</ThemeProvider>
-	);
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navbar />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/write" element={<WritePost />} />
+          </Route>
+        </Routes>
+      </Router>
+    </ThemeProvider>
+  );
 };
 
 export default App;
