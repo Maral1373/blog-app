@@ -1,15 +1,28 @@
 import React from "react";
-import { Container, Typography, TextField, Button } from "@mui/material";
+import { Container, Typography, TextField, Button, Paper } from "@mui/material";
 
 const WritePost = () => {
 	return (
-		<Container>
-			<Typography variant="h4">Write Post</Typography>
-			<TextField label="Title" fullWidth />
-			<TextField label="Text" multiline rows={4} fullWidth />
-			<Button variant="contained" color="primary">
-				Publish
-			</Button>
+		<Container component="main" maxWidth="xs">
+			<Typography variant="h4" marginBottom={"10px"}>
+				Write Post
+			</Typography>
+			<Paper
+				style={{
+					margin: "auto",
+					padding: "1rem",
+				}}
+			>
+				<TextField label="Title" fullWidth margin="normal" />
+				<TextField label="Text" multiline rows={8} fullWidth />
+				<Button
+					variant="contained"
+					color="primary"
+					sx={{ marginTop: "13px" }}
+				>
+					Publish
+				</Button>
+			</Paper>
 		</Container>
 	);
 };
