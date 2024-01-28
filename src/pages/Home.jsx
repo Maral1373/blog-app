@@ -21,24 +21,21 @@ const Home = () => {
 					>
 						<Typography variant="h6">Post Title</Typography>
 						<Typography variant="body1">
-							<p>
-								Lorem ipsum dolor sit amet, consectetur
-								adipisicing elit. Deserunt culpa nesciunt,
-								dignissimos beatae omnis accusamus consequuntur
-								necessitatibus quos, consectetur eaque
-								reprehenderit rerum explicabo non suscipit
-								delectus, quam natus magnam distinctio. Fuga eum
-								consequuntur est magnam dolorem omnis ea libero
-								cum corporis nam. Voluptatem vitae reprehenderit
-								harum quaerat. Tenetur perferendis officiis fuga
-								possimus voluptas molestiae, quia enim quasi
-								maiores expedita sapiente! Saepe laboriosam esse
-								eos cum consequatur sed nulla dolorem hic
-								voluptatibus iusto illo, nesciunt non rerum
-								suscipit? Nulla vel fuga, quidem possimus
-								exercitationem, minus corrupti laudantium
-								recusandae veritatis ut accusamus!
-							</p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing
+							elit. Deserunt culpa nesciunt, dignissimos beatae
+							omnis accusamus consequuntur necessitatibus quos,
+							consectetur eaque reprehenderit rerum explicabo non
+							suscipit delectus, quam natus magnam distinctio.
+							Fuga eum consequuntur est magnam dolorem omnis ea
+							libero cum corporis nam. Voluptatem vitae
+							reprehenderit harum quaerat. Tenetur perferendis
+							officiis fuga possimus voluptas molestiae, quia enim
+							quasi maiores expedita sapiente! Saepe laboriosam
+							esse eos cum consequatur sed nulla dolorem hic
+							voluptatibus iusto illo, nesciunt non rerum
+							suscipit? Nulla vel fuga, quidem possimus
+							exercitationem, minus corrupti laudantium recusandae
+							veritatis ut accusamus!
 						</Typography>
 
 						<div style={{ display: "flex", alignItems: "center" }}>
