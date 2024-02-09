@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import { Container, Typography, TextField, Button, Paper } from "@mui/material";
-
+import { useSelector } from "react-redux";
 const WritePost = ({ createPost }) => {
+	const loggedInUser = useSelector((state) => state.users.loggedInUser);
+
 	const formRef = useRef(null);
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData(e.target);
-		createPost(data.get("title"), data.get("text"), data.get("author"));
+		createPost(data.get("title"), data.get("text"), loggedInUser.username);
 		formRef.current.reset();
 	};
 

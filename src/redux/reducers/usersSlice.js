@@ -4,8 +4,6 @@ const usersSlice = createSlice({
 	name: "users",
 	initialState: {
 		users: [],
-		isAuthenticated: false,
-		isLoggedIn: {},
 		loggedInUser: null,
 	},
 	reducers: {
@@ -17,30 +15,25 @@ const usersSlice = createSlice({
 				password: action.payload.password,
 			});
 		},
-		isLoggedIn: (state, action) => {
+		loginUser: (state, action) => {
 			const user = state.users.find(
 				(user) =>
 					user.email === action.payload.email &&
 					user.password === action.payload.password
 			);
 			if (user) {
-				state.isAuthenticated = true;
-				state.isLoggedIn = user;
-				state.loggedInUser = user.username;
+				state.loggedInUser = user;
 				return state;
 			} else {
-				state.isAuthenticated = false;
-				state.isLoggedIn = {};
 				state.loggedInUser = null;
 				return state;
 			}
 		},
 		logoutUser: (state) => {
-			state.isAuthenticated = false;
 			state.loggedInUser = null;
 		},
 	},
 });
 
 export default usersSlice.reducer;
-export const { registerUser, isLoggedIn, logoutUser } = usersSlice.actions;
+export const { registerUser, loginUser, logoutUser } = usersSlice.actions;

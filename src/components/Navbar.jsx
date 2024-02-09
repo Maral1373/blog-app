@@ -5,7 +5,6 @@ import { Container } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const Navbar = ({ logoutUser }) => {
-	const isAuthenticated = useSelector((state) => state.users.isAuthenticated);
 	const loggedInUser = useSelector((state) => state.users.loggedInUser);
 
 	return (
@@ -32,7 +31,7 @@ const Navbar = ({ logoutUser }) => {
 						Write Post
 					</Button>
 					<div style={{ flex: 1 }} />
-					{isAuthenticated ? (
+					{loggedInUser ? (
 						<>
 							<Typography
 								variant="h6"
@@ -55,7 +54,7 @@ const Navbar = ({ logoutUser }) => {
 									borderBottomRightRadius: 4,
 								}}
 							>
-								{loggedInUser}
+								{loggedInUser.username}
 							</Typography>
 							<Button
 								color="inherit"

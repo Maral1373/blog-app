@@ -11,7 +11,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	registerUser,
-	isLoggedIn,
+	loginUser,
 	logoutUser,
 } from "./redux/reducers/usersSlice";
 import { createPost, deletePost, likePost } from "./redux/reducers/postsSlice";
@@ -26,8 +26,8 @@ const App = () => {
 		dispatch(registerUser({ username, email, password }));
 	};
 
-	const handleisLoggedIn = (email, password) => {
-		dispatch(isLoggedIn({ email, password }));
+	const handleLoginUser = (email, password) => {
+		dispatch(loginUser({ email, password }));
 	};
 
 	const handleLogoutUser = () => {
@@ -71,7 +71,7 @@ const App = () => {
 						/>
 						<Route
 							path="/login"
-							element={<Login isLoggedIn={handleisLoggedIn} />}
+							element={<Login loginUser={handleLoginUser} />}
 						/>
 						<Route
 							path="/register"

@@ -2,12 +2,12 @@ import React from "react";
 import { Container, Typography, TextField, Button, Paper } from "@mui/material";
 import { useRef } from "react";
 
-const Login = ({ isLoggedIn }) => {
+const Login = ({ loginUser }) => {
 	const formRef = useRef(null);
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData(e.target);
-		isLoggedIn(data.get("email"), data.get("password"));
+		loginUser(data.get("email"), data.get("password"));
 		formRef.current.reset();
 	};
 	return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Paper, IconButton, Box } from "@mui/material";
+import { Container, Typography, Paper, IconButton } from "@mui/material";
 import { ThumbUp, ThumbDown, Comment, Delete } from "@mui/icons-material";
 
 const PostsList = ({ posts, deletePost, likePost }) => {
