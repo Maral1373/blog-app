@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
 	Container,
 	Typography,
@@ -9,7 +9,19 @@ import {
 } from "@mui/material";
 import theme from "../components/Theme";
 
-const Register = () => {
+const Register = ({ registerUser }) => {
+	const formRef = useRef(null);
+	const onSubmit = (e) => {
+		e.preventDefault();
+		const data = new FormData(e.target);
+		registerUser(
+			data.get("username"),
+			data.get("email"),
+			data.get("password")
+		);
+		formRef.current.reset();
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Container component="main" maxWidth="xs">
@@ -22,17 +34,22 @@ const Register = () => {
 						padding: "1rem",
 					}}
 				>
-					<form>
-						<TextField label="Username" fullWidth margin="normal" />
-						<TextField label="Email" fullWidth margin="normal" />
+					<form onSubmit={onSubmit} ref={formRef}>
 						<TextField
-							label="Password"
-							type="password"
+							label="Username"
+							name="username"
 							fullWidth
 							margin="normal"
 						/>
 						<TextField
-							label="Confirm Password"
+							label="Email"
+							name="email"
+							fullWidth
+							margin="normal"
+						/>
+						<TextField
+							label="Password"
+							name="password"
 							type="password"
 							fullWidth
 							margin="normal"

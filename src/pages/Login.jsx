@@ -1,7 +1,15 @@
 import React from "react";
 import { Container, Typography, TextField, Button, Paper } from "@mui/material";
+import { useRef } from "react";
 
-const Login = () => {
+const Login = ({ isLoggedIn }) => {
+	const formRef = useRef(null);
+	const onSubmit = (e) => {
+		e.preventDefault();
+		const data = new FormData(e.target);
+		isLoggedIn(data.get("email"), data.get("password"));
+		formRef.current.reset();
+	};
 	return (
 		<Container component="main" maxWidth="xs">
 			<Typography variant="h4" marginBottom={"10px"}>
@@ -13,10 +21,16 @@ const Login = () => {
 					padding: "1rem",
 				}}
 			>
-				<form>
-					<TextField label="Email" fullWidth margin="normal" />
+				<form onSubmit={onSubmit} ref={formRef}>
+					<TextField
+						label="Email"
+						name="email"
+						fullWidth
+						margin="normal"
+					/>
 					<TextField
 						label="Password"
+						name="password"
 						type="password"
 						fullWidth
 						margin="normal"

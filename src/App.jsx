@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./components/Theme";
@@ -8,21 +8,83 @@ import Register from "./pages/Register";
 import WritePost from "./pages/WritePost";
 import Home from "./pages/Home";
 import CssBaseline from "@mui/material/CssBaseline";
-// import { UseDispatch, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	registerUser,
+	isLoggedIn,
+	logoutUser,
+} from "./redux/reducers/usersSlice";
+import { createPost, deletePost, likePost } from "./redux/reducers/postsSlice";
 
 const App = () => {
-	// const yechizi = useSelector((state) => state.login);
-	// const dispatch = useDispatch();
+	const users = useSelector((state) => state.users.users);
+	const loggedInUser = useSelector((state) => state.users.loggedInUser);
+	console.log("loggedUser", loggedInUser);
+	const dispatch = useDispatch();
+
+	const handleRegisterUser = (username, email, password) => {
+		dispatch(registerUser({ username, email, password }));
+	};
+
+	const handleisLoggedIn = (email, password) => {
+		dispatch(isLoggedIn({ email, password }));
+	};
+
+	const handleLogoutUser = () => {
+		dispatch(logoutUser());
+	};
+
+	const handleCreatePost = (title, text) => {
+		dispatch(createPost({ title, text, author: loggedInUser }));
+	};
+
+	const handleDeletePost = (id) => {
+		dispatch(deletePost(id));
+	};
+
+	const handleLikePost = (id, type) => {
+		dispatch(likePost({ id, type }));
+	};
+
+	useEffect(() => {
+		console.log("users", users);
+	}, [users]);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<Router>
 				<Routes>
-					<Route path="/" element={<Navbar />}>
-						<Route path="/" element={<Home />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/write" element={<WritePost />} />
+					<Route
+						path="/"
+						element={<Navbar logoutUser={handleLogoutUser} />}
+					>
+						<Route
+							path="/"
+							element={
+								<Home
+									users={users}
+									deletePost={handleDeletePost}
+									likePost={handleLikePost}
+								/>
+							}
+						/>
+						<Route
+							path="/login"
+							element={<Login isLoggedIn={handleisLoggedIn} />}
+						/>
+						<Route
+							path="/register"
+							element={
+								<Register registerUser={handleRegisterUser} />
+							}
+						/>
+						<Route
+							path="/write"
+							element={
+								<WritePost createPost={handleCreatePost} />
+							}
+						/>
 					</Route>
 				</Routes>
 			</Router>
