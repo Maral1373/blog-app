@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import {
 	Container,
 	Typography,
@@ -8,18 +8,30 @@ import {
 	Paper,
 } from "@mui/material";
 import theme from "../components/Theme";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/reducers/usersSlice";
 
-const Register = ({ registerUser }) => {
+const Register = () => {
+	const users = useSelector((state) => state.users.users);
+	const dispatch = useDispatch();
 	const formRef = useRef(null);
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData(e.target);
-		registerUser(
+		handleRegisterUser(
 			data.get("username"),
 			data.get("email"),
 			data.get("password")
 		);
 		formRef.current.reset();
+	};
+
+	useEffect(() => {
+		console.log("users", users);
+	}, [users]);
+
+	const handleRegisterUser = (username, email, password) => {
+		dispatch(registerUser({ username, email, password }));
 	};
 
 	return (

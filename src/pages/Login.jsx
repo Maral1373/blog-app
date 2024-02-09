@@ -1,15 +1,24 @@
 import React from "react";
 import { Container, Typography, TextField, Button, Paper } from "@mui/material";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "./redux/reducers/usersSlice";
 
-const Login = ({ loginUser }) => {
+const Login = () => {
+	const users = useSelector((state) => state.users.users);
+	const dispatch = useDispatch();
 	const formRef = useRef(null);
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData(e.target);
-		loginUser(data.get("email"), data.get("password"));
+		handleLoginUser(data.get("email"), data.get("password"));
 		formRef.current.reset();
 	};
+
+	const handleLoginUser = (email, password) => {
+		dispatch(loginUser({ email, password }));
+	};
+
 	return (
 		<Container component="main" maxWidth="xs">
 			<Typography variant="h4" marginBottom={"10px"}>
