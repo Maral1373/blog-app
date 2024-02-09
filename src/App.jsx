@@ -14,7 +14,6 @@ import {
   loginUser,
   logoutUser,
 } from "./redux/reducers/usersSlice";
-import { createPost, deletePost, likePost } from "./redux/reducers/postsSlice";
 
 const App = () => {
   const users = useSelector((state) => state.users.users);
@@ -34,18 +33,6 @@ const App = () => {
     dispatch(logoutUser());
   };
 
-  const handleCreatePost = (title, text) => {
-    dispatch(createPost({ title, text, author: loggedInUser.username }));
-  };
-
-  const handleDeletePost = (id) => {
-    dispatch(deletePost(id));
-  };
-
-  const handleLikePost = (id, type) => {
-    dispatch(likePost({ id, type }));
-  };
-
   useEffect(() => {
     console.log("users", users);
   }, [users]);
@@ -56,16 +43,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Navbar logoutUser={handleLogoutUser} />}>
-            <Route
-              path="/"
-              element={
-                <Home
-                  users={users}
-                  deletePost={handleDeletePost}
-                  likePost={handleLikePost}
-                />
-              }
-            />
+            <Route path="/" element={<Home />} />
             <Route
               path="/login"
               element={<Login loginUser={handleLoginUser} />}
@@ -74,10 +52,7 @@ const App = () => {
               path="/register"
               element={<Register registerUser={handleRegisterUser} />}
             />
-            <Route
-              path="/write"
-              element={<WritePost createPost={handleCreatePost} />}
-            />
+            <Route path="/write" element={<WritePost />} />
           </Route>
         </Routes>
       </Router>

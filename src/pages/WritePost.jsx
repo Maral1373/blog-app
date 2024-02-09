@@ -1,11 +1,21 @@
 import React, { useRef } from "react";
 import { Container, Typography, TextField, Button, Paper } from "@mui/material";
-const WritePost = ({ createPost }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "./redux/reducers/postsSlice";
+
+const WritePost = () => {
   const formRef = useRef(null);
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((state) => state.users.loggedInUser);
+
+  const handleCreatePost = (title, text) => {
+    dispatch(createPost({ title, text, author: loggedInUser.username }));
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    createPost(data.get("title"), data.get("text"));
+    handleCreatePost(data.get("title"), data.get("text"));
     formRef.current.reset();
   };
 
