@@ -2,11 +2,8 @@ import React from "react";
 import { AppBar, Toolbar, Button, Typography } from "@mui/material";
 import { Outlet, Link } from "react-router-dom";
 import { Container } from "@mui/material";
-import { useSelector } from "react-redux";
 
-const Navbar = ({ logoutUser }) => {
-	const loggedInUser = useSelector((state) => state.users.loggedInUser);
-
+const Navbar = ({ loggedInUser, logoutUser }) => {
 	return (
 		<>
 			<AppBar

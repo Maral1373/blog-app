@@ -16,17 +16,14 @@ const usersSlice = createSlice({
 			});
 		},
 		loginUser: (state, action) => {
+			const { email, password } = action.payload;
 			const user = state.users.find(
-				(user) =>
-					user.email === action.payload.email &&
-					user.password === action.payload.password
+				(user) => user.email === email && user.password === password
 			);
 			if (user) {
 				state.loggedInUser = user;
-				return state;
 			} else {
 				state.loggedInUser = null;
-				return state;
 			}
 		},
 		logoutUser: (state) => {
@@ -34,6 +31,5 @@ const usersSlice = createSlice({
 		},
 	},
 });
-
 export default usersSlice.reducer;
 export const { registerUser, loginUser, logoutUser } = usersSlice.actions;

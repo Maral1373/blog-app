@@ -27,7 +27,12 @@ const App = () => {
 				<Routes>
 					<Route
 						path="/"
-						element={<Navbar logoutUser={handleLogoutUser} />}
+						element={
+							<Navbar
+								logoutUser={handleLogoutUser}
+								loggedInUser={loggedInUser}
+							/>
+						}
 					>
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Login />} />
