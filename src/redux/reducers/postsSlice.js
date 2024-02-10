@@ -29,6 +29,7 @@ const postsSlice = createSlice({
 				}
 			});
 		},
+		// editPost: (state, action) => {},
 	},
 });
 

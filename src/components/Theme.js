@@ -9,6 +9,7 @@ const theme = createTheme({
 			main: "#dc004e", // pink
 		},
 		background: {
+			main: "#a0a4fa",
 			default: "#f2f2f2", // light grey
 		},
 	},

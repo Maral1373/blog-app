@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Container, Typography, TextField, Button, Paper } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/reducers/usersSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +8,10 @@ const Login = () => {
 	const dispatch = useDispatch();
 	const formRef = useRef(null);
 	const navigate = useNavigate();
+	const loggedInUser = useSelector((state) => state.users.loggedInUser);
 
 	const handleLoginUser = (email, password) => {
 		dispatch(loginUser({ email, password }));
-		navigate("/");
 	};
 
 	const onSubmit = (e) => {
@@ -20,6 +20,10 @@ const Login = () => {
 		handleLoginUser(data.get("email"), data.get("password"));
 		formRef.current.reset();
 	};
+
+	useEffect(() => {
+		if (loggedInUser) navigate("/");
+	}, [loggedInUser]);
 
 	return (
 		<Container component="main" maxWidth="xs">

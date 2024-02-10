@@ -9,15 +9,27 @@ import {
 } from "@mui/material";
 import theme from "../components/Theme";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/reducers/usersSlice";
 
 const Register = () => {
 	const dispatch = useDispatch();
 	const formRef = useRef(null);
 	const navigate = useNavigate();
+	const users = useSelector((state) => state.users.users);
 
 	const handleRegisterUser = (username, email, password) => {
+		const userExist = users.find(
+			(user) => user.username === username || user.email === email
+		);
+		console.log("userExist", userExist);
+		if (userExist) {
+			return alert("user is already registered");
+		}
+		console.log("password", password.lenght);
+		if (`${password}`.lenght < 8) {
+			return alert("password musst be 8 or more characters");
+		}
 		dispatch(registerUser({ username, email, password }));
 		navigate("/login");
 	};
