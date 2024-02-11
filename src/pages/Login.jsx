@@ -1,5 +1,12 @@
-import React, { useRef, useEffect } from "react";
-import { Container, Typography, TextField, Button, Paper } from "@mui/material";
+import React, { useRef, useEffect, useState } from "react";
+import {
+	Container,
+	Typography,
+	TextField,
+	Button,
+	Paper,
+	Alert,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/reducers/usersSlice";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +17,15 @@ const Login = () => {
 	const navigate = useNavigate();
 	const loggedInUser = useSelector((state) => state.users.loggedInUser);
 	const users = useSelector((state) => state.users.users);
-
+	const [errorMessage, setErrorMessage] = useState("");
+	console.log("users", users);
 	const handleLoginUser = (email, password) => {
 		const auth = users.find(
-			(user) => user.email !== email || user.password !== password
+			(user) => user.email === email && user.password === password
 		);
-		if (auth) {
-			return alert("email or password incorrect");
+		if (!auth) {
+			setErrorMessage("email or password incorrect");
+			return;
 		}
 		dispatch(loginUser({ email, password }));
 	};
@@ -43,6 +52,7 @@ const Login = () => {
 					padding: "1rem",
 				}}
 			>
+				{errorMessage && <Alert severity="error">{errorMessage}</Alert>}
 				<form onSubmit={onSubmit} ref={formRef}>
 					<TextField
 						label="Email"

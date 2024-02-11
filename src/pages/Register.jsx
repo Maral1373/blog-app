@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
 	Container,
 	Typography,
@@ -6,6 +6,7 @@ import {
 	Button,
 	ThemeProvider,
 	Paper,
+	Alert,
 } from "@mui/material";
 import theme from "../components/Theme";
 import { useNavigate } from "react-router-dom";
@@ -17,18 +18,19 @@ const Register = () => {
 	const formRef = useRef(null);
 	const navigate = useNavigate();
 	const users = useSelector((state) => state.users.users);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const handleRegisterUser = (username, email, password) => {
 		const userExist = users.find(
 			(user) => user.username === username || user.email === email
 		);
-		console.log("userExist", userExist);
 		if (userExist) {
-			return alert("user is already registered");
+			setErrorMessage("User is already registered");
+			return;
 		}
-		console.log("password", `${password}`.length);
 		if (`${password}`.length < 8) {
-			return alert("password musst be 8 or more characters");
+			setErrorMessage("Password must be 8 or more characters");
+			return;
 		}
 		dispatch(registerUser({ username, email, password }));
 		navigate("/login");
@@ -57,6 +59,9 @@ const Register = () => {
 						padding: "1rem",
 					}}
 				>
+					{errorMessage && (
+						<Alert severity="error">{errorMessage}</Alert>
+					)}
 					<form onSubmit={onSubmit} ref={formRef}>
 						<TextField
 							label="Username"
