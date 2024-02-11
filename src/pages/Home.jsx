@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { Container, Typography } from "@mui/material";
-import PostsList from "../components/PostsList";
+import {
+	Container,
+	Typography,
+	MenuItem,
+	Select,
+	TextField,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePost, likePost } from "../redux/reducers/postsSlice";
-import { Select, MenuItem } from "@mui/material";
+import PostsList from "../components/PostsList";
 
 const Home = () => {
 	const posts = useSelector((state) => state.posts);
 	const users = useSelector((state) => state.users.users);
 	const [selectedUser, setSelectedUser] = useState("");
+	const [searchText, setSearchText] = useState("");
+
 	const dispatch = useDispatch();
 
 	const handleDeletePost = (id) => {
@@ -23,37 +30,50 @@ const Home = () => {
 		setSelectedUser(event.target.value);
 	};
 
+	const handleSearch = (event) => {
+		setSearchText(event.target.value);
+	};
+
 	return (
-		<Container
-			style={{
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "flex-start",
-			}}
-		>
+		<Container>
 			<Typography variant="h4" marginBottom={2}>
 				Latest Posts
 			</Typography>
-			<Select
-				value={selectedUser}
-				onChange={handleChange}
+			<div
 				style={{
-					flex: "1",
-					width: "380px",
+					display: "flex",
+					marginBottom: "10px",
+					width: "66rem",
 				}}
 			>
-				<MenuItem value="">All Users</MenuItem>
-				{users.map((user) => (
-					<MenuItem key={user.id} value={user.username}>
-						{user.username}
-					</MenuItem>
-				))}
-			</Select>
+				<Select
+					value={selectedUser}
+					onChange={handleChange}
+					displayEmpty
+					sx={{ flex: "1", marginLeft: "3rem" }}
+				>
+					<MenuItem value="">All Users</MenuItem>
+					{users.map((user) => (
+						<MenuItem key={user.id} value={user.username}>
+							{user.username}
+						</MenuItem>
+					))}
+				</Select>
+				<TextField
+					label="Search"
+					variant="outlined"
+					size="medium"
+					value={searchText}
+					onChange={handleSearch}
+					sx={{ flex: "3" }}
+				/>
+			</div>
 			<PostsList
 				posts={posts}
 				deletePost={handleDeletePost}
 				likePost={handleLikePost}
 				selectedUser={selectedUser}
+				searchText={searchText}
 			/>
 		</Container>
 	);
