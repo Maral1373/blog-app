@@ -26,8 +26,8 @@ const Register = () => {
 		if (userExist) {
 			return alert("user is already registered");
 		}
-		console.log("password", password.lenght);
-		if (`${password}`.lenght < 8) {
+		console.log("password", `${password}`.length);
+		if (`${password}`.length < 8) {
 			return alert("password musst be 8 or more characters");
 		}
 		dispatch(registerUser({ username, email, password }));

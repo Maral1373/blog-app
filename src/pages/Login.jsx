@@ -9,8 +9,15 @@ const Login = () => {
 	const formRef = useRef(null);
 	const navigate = useNavigate();
 	const loggedInUser = useSelector((state) => state.users.loggedInUser);
+	const users = useSelector((state) => state.users.users);
 
 	const handleLoginUser = (email, password) => {
+		const auth = users.find(
+			(user) => user.email !== email || user.password !== password
+		);
+		if (auth) {
+			return alert("email or password incorrect");
+		}
 		dispatch(loginUser({ email, password }));
 	};
 
