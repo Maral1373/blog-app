@@ -14,7 +14,7 @@ const Home = () => {
 	const posts = useSelector((state) => state.posts);
 	const users = useSelector((state) => state.users.users);
 	const [selectedUser, setSelectedUser] = useState("");
-	const [searchText, setSearchText] = useState("");
+	const [search, setSearch] = useState("");
 
 	const dispatch = useDispatch();
 
@@ -30,8 +30,8 @@ const Home = () => {
 		setSelectedUser(event.target.value);
 	};
 
-	const handleSearch = (event) => {
-		setSearchText(event.target.value);
+	const handleSearch = (e) => {
+		setSearch(e.target.value);
 	};
 
 	return (
@@ -63,7 +63,7 @@ const Home = () => {
 					label="Search"
 					variant="outlined"
 					size="medium"
-					value={searchText}
+					value={search}
 					onChange={handleSearch}
 					sx={{ flex: "3" }}
 				/>
@@ -73,7 +73,7 @@ const Home = () => {
 				deletePost={handleDeletePost}
 				likePost={handleLikePost}
 				selectedUser={selectedUser}
-				searchText={searchText}
+				onSearch={search}
 			/>
 		</Container>
 	);
