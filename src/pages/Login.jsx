@@ -30,10 +30,27 @@ const Login = () => {
 		dispatch(loginUser({ email, password }));
 	};
 
+	const testLoginUser = async (email, password) => {
+	    try {
+		    const result = await fetch('http://localhost:3000/auth/login', {
+			method: 'POST',
+			headers: {
+			    'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email, password })
+		    })
+		    const data = await result.json()
+		    console.log(`response from backend: ${data}`)
+	    } catch(e) {
+		    console.log('oopsi happened', e)
+	    }
+	}
+
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData(e.target);
-		handleLoginUser(data.get("email"), data.get("password"));
+		// handleLoginUser(data.get("email"), data.get("password"));
+		testLoginUser(data.get("email"), data.get("password"))
 		formRef.current.reset();
 	};
 
