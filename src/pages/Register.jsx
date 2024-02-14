@@ -36,14 +36,31 @@ const Register = () => {
 		navigate("/login");
 	};
 
+	const testRegisterUser = async (username, email, password) => {
+	    try {
+		    const result = await fetch('http://localhost:3000/auth/register', {
+			method: 'POST',
+			headers: {
+			    'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ username, email, password })
+		    })
+		    const data = await result.json()
+		    console.log(`response from backend: ${data}`)
+	    } catch(e) {
+		    console.log('oopsi happened', e)
+	    }
+	}
+
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData(e.target);
-		handleRegisterUser(
-			data.get("username"),
-			data.get("email"),
-			data.get("password")
-		);
+		// handleRegisterUser(
+		// 	data.get("username"),
+		// 	data.get("email"),
+		// 	data.get("password")
+		// );
+		testRegisterUser(data.get("username"),data.get("email"),data.get("password"))
 		formRef.current.reset();
 	};
 
