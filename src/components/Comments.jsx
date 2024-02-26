@@ -41,7 +41,7 @@ const Comments = ({ comments, deleteComment, likeComment }) => {
 							variant="subtitle1"
 							style={{ marginLeft: 10 }}
 						>
-							{comment.like}
+							{comment.likes}
 						</Typography>
 						<IconButton
 							style={{ marginLeft: 10 }}
@@ -55,7 +55,7 @@ const Comments = ({ comments, deleteComment, likeComment }) => {
 							variant="subtitle1"
 							style={{ marginLeft: 7 }}
 						>
-							{comment.dislike}
+							{comment.dislikes}
 						</Typography>
 						<IconButton
 							color="default"
