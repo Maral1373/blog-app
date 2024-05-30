@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_URL } from "../../constants";
 
 export const addComment = createAsyncThunk(
 	"comments/addComment",
 	async ({ text, postId, token }, { rejectWithValue }) => {
 		try {
-			const result = await fetch("http://localhost:3000/comments", {
+			const result = await fetch(`${API_URL}/comments`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -28,7 +29,7 @@ export const getComments = createAsyncThunk(
 	async ({ postId }, { rejectWithValue }) => {
 		try {
 			const result = await fetch(
-				`http://localhost:3000/comments/${postId}`,
+				`${API_URL}/comments/${postId}`,
 				{
 					method: "GET",
 					headers: {
@@ -52,7 +53,7 @@ export const deleteComment = createAsyncThunk(
 	async ({ commentId, token }, { rejectWithValue }) => {
 		try {
 			const result = await fetch(
-				`http://localhost:3000/comments/${commentId}`,
+				`${API_URL}/comments/${commentId}`,
 				{
 					method: "DELETE",
 					headers: {
@@ -74,7 +75,7 @@ export const likeComment = createAsyncThunk(
 	"comments/likeComment",
 	async ({ commentId }, { rejectWithValue }) => {
 		try {
-			const result = await fetch("http://localhost:3000/comments/like", {
+			const result = await fetch(`${API_URL}/comments/like`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -97,7 +98,7 @@ export const dislikeComment = createAsyncThunk(
 	async ({ commentId }, { rejectWithValue }) => {
 		try {
 			const result = await fetch(
-				"http://localhost:3000/comments/dislike",
+				`${API_URL}/comments/dislike",
 				{
 					method: "POST",
 					headers: {
