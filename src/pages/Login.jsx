@@ -70,7 +70,7 @@ const Login = () => {
 							name="email"
 							fullWidth
 							margin="normal"
-							defaultValue="maral@gmail.com"
+							// defaultValue="maral@gmail.com"
 						/>
 						<TextField
 							label="Password"
@@ -78,7 +78,7 @@ const Login = () => {
 							type="password"
 							fullWidth
 							margin="normal"
-							defaultValue="maralmaral"
+							// defaultValue="maralmaral"
 						/>
 						<Button
 							variant="contained"
