@@ -72,7 +72,7 @@ const Home = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<Container>
-				<Typography variant="h4" marginBottom={2}>
+				<Typography variant="h4" style={{ margin: "0px 45px 20px" }}>
 					Latest Posts
 				</Typography>
 				<div
